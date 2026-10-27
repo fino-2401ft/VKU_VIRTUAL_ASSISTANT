@@ -1,0 +1,37 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+~$*.docx
+~$*
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+*.pem
+credentials*
+.aws/
+
+# Dependencies / build
+node_modules/
+dist/
+build/
+.aws-sam/
+samconfig.toml
+__pycache__/
+*.pyc
+.venv/
+venv/
+backend/.venv/
+
+# Large / private PDFs (giữ checklist trong docs; upload S3 riêng)
+data/pdfs/**/*.pdf
+data/pdfs/**/*.PDF
+
+# Logs / temp
+*.log
+tmp/
+temp/

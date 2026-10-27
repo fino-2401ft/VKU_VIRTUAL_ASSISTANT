@@ -1,0 +1,119 @@
+[
+  {
+    "id": "q1-1",
+    "category": "Q1",
+    "category_name": "Học phí",
+    "keywords": ["học phí", "học phi", "tín chỉ", "tin chi", "đóng tiền", "dong tien", "mức phí", "muc phi"],
+    "question": "Học phí một tín chỉ là bao nhiêu?",
+    "answer": "Theo dữ liệu demo MVP: học phí chương trình đại trà khoảng 450.000–650.000 VNĐ/tín chỉ tùy ngành. Chương trình chất lượng cao / đặc thù có thể cao hơn. Số liệu chính thức sẽ lấy từ PDF quy chế học vụ khi kết nối Bedrock Knowledge Base.",
+    "source": "demo/hoc-vu-hoc-phi.json"
+  },
+  {
+    "id": "q1-2",
+    "category": "Q1",
+    "category_name": "Học phí",
+    "keywords": ["miễn giảm", "mien giam", "học phí", "chính sách", "hoàn cảnh", "khó khăn"],
+    "question": "Có chính sách miễn giảm học phí không?",
+    "answer": "Có. Sinh viên thuộc diện chính sách (hộ nghèo, cận nghèo, người dân tộc thiểu số theo quy định, con thương binh/liệt sĩ…) có thể được miễn/giảm học phí khi nộp đủ hồ sơ về Phòng Công tác sinh viên. Đây là câu trả lời demo — chi tiết theo đúng PDF nội bộ VKU.",
+    "source": "demo/hoc-vu-mien-giam.json"
+  },
+  {
+    "id": "q2-1",
+    "category": "Q2",
+    "category_name": "Quy chế đào tạo",
+    "keywords": ["tốt nghiệp", "tot nghiep", "điều kiện", "dieu kien", "xét tốt nghiệp", "graduation"],
+    "question": "Điều kiện xét tốt nghiệp là gì?",
+    "answer": "Sinh viên được xét tốt nghiệp khi: (1) hoàn thành đủ số tín chỉ chương trình đào tạo, (2) điểm trung bình tích lũy đạt ngưỡng quy định, (3) hoàn thành chứng chỉ/điều kiện ngoại ngữ – tin học theo ngành (nếu có), (4) không đang bị kỷ luật ở mức đình chỉ. Chi tiết theo Quy chế đào tạo VKU (PDF).",
+    "source": "demo/quy-che-tot-nghiep.json"
+  },
+  {
+    "id": "q2-2",
+    "category": "Q2",
+    "category_name": "Quy chế đào tạo",
+    "keywords": ["cảnh báo", "canh bao", "học vụ", "buộc thôi học", "thôi học", "điểm thấp"],
+    "question": "Khi nào bị cảnh báo học vụ?",
+    "answer": "Thường bị cảnh báo học vụ khi điểm trung bình học kỳ hoặc tích lũy dưới ngưỡng quy định, hoặc số tín chỉ không đạt quá mức cho phép. Sau nhiều lần cảnh báo có thể bị buộc thôi học theo quy chế. Hãy đối chiếu đúng bảng ngưỡng trong PDF quy chế đào tạo.",
+    "source": "demo/quy-che-canh-bao.json"
+  },
+  {
+    "id": "q3-1",
+    "category": "Q3",
+    "category_name": "Thi và đánh giá",
+    "keywords": ["thi lại", "thi lai", "học lại", "hoc lai", "rớt", "không đạt", "điểm f"],
+    "question": "Quy định thi lại / học lại như thế nào?",
+    "answer": "Nếu không đạt môn, sinh viên đăng ký học lại (hoặc thi lại nếu quy chế ngành cho phép) trong các kỳ tiếp theo, đóng học phí tương ứng số tín chỉ. Điểm mới thường thay thế hoặc được ghi nhận theo quy định cập nhật của nhà trường.",
+    "source": "demo/quy-che-thi-lai.json"
+  },
+  {
+    "id": "q3-2",
+    "category": "Q3",
+    "category_name": "Thi và đánh giá",
+    "keywords": ["điểm", "thành phần", "giữa kỳ", "cuối kỳ", "chuyên cần", "đánh giá"],
+    "question": "Điểm môn học gồm những thành phần nào?",
+    "answer": "Thông thường gồm: điểm quá trình / chuyên cần, điểm giữa kỳ, điểm cuối kỳ (trọng số do đề cương môn học quy định, ví dụ 20%–30%–50%). Sinh viên xem cụ thể trên đề cương hoặc cổng học vụ.",
+    "source": "demo/danh-gia-diem.json"
+  },
+  {
+    "id": "q4-1",
+    "category": "Q4",
+    "category_name": "Học bổng",
+    "keywords": ["học bổng", "hoc bong", "khuyến khích", "scholarship", "xét học bổng"],
+    "question": "Điều kiện xét học bổng khuyến khích học tập?",
+    "answer": "Thường xét theo điểm trung bình học kỳ, điểm rèn luyện, không kỷ luật trong kỳ xét. Mức học bổng chia theo loại A/B/C (demo). Hồ sơ và lịch xét do Phòng Công tác sinh viên thông báo từng học kỳ.",
+    "source": "demo/hoc-bong.json"
+  },
+  {
+    "id": "q5-1",
+    "category": "Q5",
+    "category_name": "Ngành tuyển sinh",
+    "keywords": ["ngành", "nganh", "tuyển sinh", "tuyen sinh", "đào tạo", "chuyên ngành", "ktpm", "cntt"],
+    "question": "VKU tuyển những ngành nào?",
+    "answer": "Dữ liệu demo: VKU đào tạo các nhóm ngành CNTT & truyền thông như Công nghệ thông tin, Kỹ thuật phần mềm, An toàn thông tin, Trí tuệ nhân tạo, Hệ thống thông tin, Thiết kế Mỹ thuật số… Danh mục chính thức theo Đề án tuyển sinh năm hiện hành (PDF).",
+    "source": "demo/tuyen-sinh-nganh.json"
+  },
+  {
+    "id": "q6-1",
+    "category": "Q6",
+    "category_name": "Phương thức và hồ sơ",
+    "keywords": ["học bạ", "hoc ba", "hồ sơ", "ho so", "phương thức", "phuong thuc", "xét tuyển", "giấy tờ"],
+    "question": "Xét học bạ cần những giấy tờ gì?",
+    "answer": "Thường gồm: phiếu đăng ký xét tuyển, học bạ THPT (bản sao chứng thực), bằng tốt nghiệp hoặc giấy chứng nhận tốt nghiệp tạm thời, CCCD, ảnh thẻ, lệ phí xét tuyển. Tùy phương thức (học bạ / điểm thi / ĐGNL) mà thành phần hồ sơ khác nhau — xem Đề án TS.",
+    "source": "demo/ho-so-xet-tuyen.json"
+  },
+  {
+    "id": "q6-2",
+    "category": "Q6",
+    "category_name": "Phương thức và hồ sơ",
+    "keywords": ["phương thức", "xét điểm thi", "thpt quốc gia", "đánh giá năng lực", "dgnl"],
+    "question": "Các phương thức xét tuyển gồm những gì?",
+    "answer": "Demo: (1) Xét điểm thi tốt nghiệp THPT, (2) Xét học bạ, (3) Xét chứng chỉ/đánh giá năng lực (nếu Đề án có). Tổ hợp môn và ngưỡng điểm theo từng ngành trong PDF tuyển sinh.",
+    "source": "demo/phuong-thuc-ts.json"
+  },
+  {
+    "id": "q7-1",
+    "category": "Q7",
+    "category_name": "Thời gian tuyển sinh",
+    "keywords": ["hạn nộp", "han nop", "thời gian", "lịch", "đợt 1", "nhập học", "chỉ tiêu"],
+    "question": "Hạn nộp hồ sơ đợt 1 là khi nào?",
+    "answer": "Dữ liệu demo: Đợt xét sớm / đợt 1 thường diễn ra khoảng tháng 5–7 (tùy năm). Mốc chính thức lấy theo thông báo tuyển sinh VKU trên website và PDF Đề án — nhóm sẽ thay bằng ngày thật từ tài liệu PDF của bạn.",
+    "source": "demo/lich-tuyen-sinh.json"
+  },
+  {
+    "id": "q8-1",
+    "category": "Q8",
+    "category_name": "FAQ chung",
+    "keywords": ["địa chỉ", "dia chi", "ở đâu", "trụ sở", "campus", "đà nẵng", "da nang", "vku"],
+    "question": "Địa chỉ VKU ở đâu?",
+    "answer": "Trường Đại học Công nghệ Thông tin và Truyền thông Việt – Hàn (VKU) thuộc Đại học Đà Nẵng, địa chỉ: 470 Trần Đại Nghĩa, quận Ngũ Hành Sơn, Đà Nẵng.",
+    "source": "demo/lien-he.json"
+  },
+  {
+    "id": "q8-2",
+    "category": "Q8",
+    "category_name": "FAQ chung",
+    "keywords": ["liên hệ", "lien he", "hotline", "email", "phòng đào tạo", "tuyển sinh", "số điện thoại"],
+    "question": "Liên hệ phòng Đào tạo / Tuyển sinh thế nào?",
+    "answer": "Demo: liên hệ qua website chính thức VKU và bộ phận tuyển sinh / đào tạo theo số điện thoại & email công bố trên cổng thông tin nhà trường. Khi có PDF chính thức, trợ lý sẽ trích đúng số liên hệ từ tài liệu.",
+    "source": "demo/lien-he.json"
+  }
+]
