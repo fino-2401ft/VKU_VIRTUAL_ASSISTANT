@@ -13,7 +13,7 @@
 
 ## Danh sách PDF học vụ (`hoc-vu/`)
 
-| # | Tên file (sau khi đổi tên) | Năm | Copy được chữ? (Có/Không) | Phủ câu hỏi | Đã upload S3? | Đã sync KB? | Ngày sync | Ghi chú |
+| # | Tên file (sau khi đổi tên) | Năm | Copy được chữ? (Có/Không) | Phủ câu hỏi | Đã upload S3? | Đã ingest RAG? | Ngày ingest | Ghi chú |
 |---|---|---|---|---|---|---|---|---|
 | 1 | | | | Q1–Q4 | ☐ | ☐ | | |
 | 2 | | | | | ☐ | ☐ | | |
@@ -21,7 +21,7 @@
 
 ## Danh sách PDF tuyển sinh (`tuyen-sinh/`)
 
-| # | Tên file (sau khi đổi tên) | Năm | Copy được chữ? (Có/Không) | Phủ câu hỏi | Đã upload S3? | Đã sync KB? | Ngày sync | Ghi chú |
+| # | Tên file (sau khi đổi tên) | Năm | Copy được chữ? (Có/Không) | Phủ câu hỏi | Đã upload S3? | Đã ingest RAG? | Ngày ingest | Ghi chú |
 |---|---|---|---|---|---|---|---|---|
 | 1 | | | | Q5–Q7 | ☐ | ☐ | | |
 | 2 | | | | | ☐ | ☐ | | |
@@ -31,7 +31,7 @@
 
 1. Mở PDF → bôi đen 1 đoạn → Copy → Paste Notepad được không?
 2. Nếu **Không** (scan ảnh): ưu tiên tìm bản text; nếu buộc dùng thì ghi rủi ro OCR vào cột Ghi chú.
-3. Bỏ file trùng / hết hiệu lực khỏi KB (giữ trong thư mục `archive/` local nếu cần).
+3. Bỏ file trùng / scan không OCR khỏi thư mục ingest (giữ `archive/` nếu cần). Sau mỗi lần thêm file chạy `python -m app.ingest`.
 
 ## Mapping PDF → nhóm câu hỏi
 

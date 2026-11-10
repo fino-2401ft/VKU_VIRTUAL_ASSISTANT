@@ -5,13 +5,13 @@ Actor chính: **Sinh viên / Thí sinh / Khách** dùng Web chat.
 ## UC01 — Hỏi học phí / miễn giảm (Q1)
 
 - **Tác nhân:** Sinh viên / thí sinh
-- **Tiền điều kiện:** PDF học vụ đã có trong Knowledge Base
+- **Tiền điều kiện:** Tài liệu học phí/học vụ đã `ingest` vào vector store
 - **Luồng chính:**
   1. User mở web chat
-  2. Gõ: “Học phí một tín chỉ là bao nhiêu?” / “Có miễn giảm học phí không?”
-  3. Hệ thống retrieve đoạn PDF liên quan → sinh câu trả lời
-  4. Hiển thị câu trả lời + nguồn PDF
-- **Ngoại lệ:** Không tìm thấy → fallback gợi ý câu hỏi khác
+  2. Gõ câu hỏi về học phí / quy chế
+  3. RAG retrieve đoạn liên quan → Ollama sinh câu trả lời
+  4. Hiển thị câu trả lời + nguồn file
+- **Ngoại lệ:** Không tìm thấy → fallback “Không tìm thấy trong tài liệu…”
 
 ## UC02 — Hỏi quy chế đào tạo / tốt nghiệp (Q2)
 
@@ -54,8 +54,8 @@ Actor chính: **Sinh viên / Thí sinh / Khách** dùng Web chat.
 ## User flow tổng quát
 
 ```text
-[Mở Web] → [Gõ câu hỏi / bấm gợi ý] → [API POST /chat]
-       → [Bedrock KB retrieve + generate]
+[Mở Web] → [Gõ câu hỏi / bấm gợi ý] → [API POST /api/chat]
+       → [RAG: embed → retrieve → Ollama generate]
        → [Hiển thị answer + sources]
        → [Tiếp tục hỏi trong cùng session]
 ```

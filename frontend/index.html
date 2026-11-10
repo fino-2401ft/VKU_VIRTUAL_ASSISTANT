@@ -30,12 +30,12 @@
     <aside class="sidebar">
       <h1 class="hero-title">Hỏi thông tin học vụ &amp; tuyển sinh VKU</h1>
       <p class="hero-text">
-        Bản demo phục vụ báo cáo tiến độ. Sau này sẽ nối Amazon Bedrock Knowledge Bases trên AWS với PDF thật của nhóm.
+        RAG tự build: đọc tài liệu học vụ → retrieve → Ollama trả lời. Cloud: EC2 + S3 (không dùng Bedrock).
       </p>
       <h2 class="side-label">Câu hỏi gợi ý</h2>
       <div id="suggestions" class="suggestions"></div>
       <div class="side-note">
-        <strong>Cloud roadmap:</strong> Web → API Gateway → Lambda → Bedrock KB (S3 PDF)
+        <strong>Cloud:</strong> Web → FastAPI + Ollama (EC2) ← tài liệu S3 / data/pdfs
       </div>
     </aside>
 

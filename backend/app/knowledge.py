@@ -17,13 +17,11 @@ FALLBACK_ANSWER = (
 )
 
 SUGGESTIONS = [
-    "Học phí một tín chỉ bao nhiêu?",
-    "Điều kiện tốt nghiệp là gì?",
-    "Quy định thi lại như thế nào?",
-    "Điều kiện xét học bổng?",
-    "VKU tuyển những ngành nào?",
-    "Xét học bạ cần giấy tờ gì?",
-    "Hạn nộp hồ sơ đợt 1?",
+    "Học phí học kỳ 1 năm 2025-2026?",
+    "Thời gian thu học phí học kỳ 2?",
+    "Thông báo học phí GDQP năm 2025?",
+    "Học phí học kỳ hè?",
+    "Học phí trình độ thạc sĩ?",
     "Địa chỉ VKU ở đâu?",
 ]
 

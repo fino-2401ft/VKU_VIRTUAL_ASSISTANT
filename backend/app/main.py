@@ -11,14 +11,17 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
+from . import ollama_client
 from .knowledge import SUGGESTIONS, answer_question, load_faq
+from .rag import answer_with_rag, rag_ready
+from .rag_store import load_chunks, store_exists
 
 FRONTEND_DIR = Path(__file__).resolve().parents[2] / "frontend"
 
 app = FastAPI(
     title="VKU Virtual Assistant API",
-    description="Demo trợ lý ảo học vụ & tuyển sinh VKU (local MVP)",
-    version="0.1.0",
+    description="Trợ lý ảo học vụ & tuyển sinh VKU — RAG (Ollama) + FAQ fallback",
+    version="0.2.0",
 )
 
 app.add_middleware(
@@ -29,7 +32,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# sessionId -> list of {role, content, ts}
 SESSIONS: dict[str, list[dict[str, Any]]] = {}
 
 
@@ -47,13 +49,36 @@ class ChatResponse(BaseModel):
     mode: str
 
 
+def resolve_answer(message: str) -> dict[str, Any]:
+    """Ưu tiên RAG Ollama; lỗi/thiếu thì fallback FAQ."""
+    if rag_ready():
+        try:
+            return answer_with_rag(message)
+        except Exception as exc:  # noqa: BLE001
+            faq = answer_question(message)
+            faq["answer"] = (
+                f"(RAG tạm lỗi: {exc})\n\n" + faq["answer"]
+                if faq.get("mode") == "faq-demo"
+                else faq["answer"]
+            )
+            faq["mode"] = "faq-fallback"
+            return faq
+    return answer_question(message)
+
+
 @app.get("/api/health")
 def health():
     return {
         "status": "ok",
         "service": "vku-virtual-assistant",
         "faq_items": len(load_faq()),
-        "note": "Local demo — sẽ thay bằng API Gateway + Lambda + Bedrock KB trên AWS",
+        "ollama": ollama_client.is_available(),
+        "vector_store": store_exists(),
+        "chunk_count": len(load_chunks()) if store_exists() else 0,
+        "rag_ready": rag_ready(),
+        "chat_model": ollama_client.CHAT_MODEL,
+        "embed_model": ollama_client.EMBED_MODEL,
+        "note": "RAG tự build (Ollama + vector store). Triển khai Cloud: EC2 + S3. Không dùng Bedrock.",
     }
 
 
@@ -76,16 +101,16 @@ def chat(body: ChatRequest):
     history = SESSIONS.setdefault(session_id, [])
     history.append({"role": "user", "content": body.message, "ts": time.time()})
 
-    result = answer_question(body.message)
+    result = resolve_answer(body.message)
     history.append(
         {
             "role": "assistant",
             "content": result["answer"],
             "ts": time.time(),
             "sources": result["sources"],
+            "mode": result.get("mode"),
         }
     )
-    # giữ tối đa 40 message / session (demo in-memory)
     SESSIONS[session_id] = history[-40:]
 
     return ChatResponse(

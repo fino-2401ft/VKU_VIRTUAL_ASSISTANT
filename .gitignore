@@ -3,6 +3,7 @@
 Thumbs.db
 .vscode/
 .idea/
+.cursor/
 *.swp
 ~$*.docx
 ~$*
@@ -30,6 +31,11 @@ backend/.venv/
 # Large / private PDFs (giữ checklist trong docs; upload S3 riêng)
 data/pdfs/**/*.pdf
 data/pdfs/**/*.PDF
+data/pdfs/**/*.docx
+data/pdfs/**/*.DOCX
+
+# Vector store (có embedding, file lớn)
+backend/data/vector_store/
 
 # Logs / temp
 *.log

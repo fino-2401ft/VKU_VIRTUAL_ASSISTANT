@@ -1,40 +1,46 @@
-# Chạy demo nhanh (báo cáo tiến độ)
+# Chạy demo — RAG tự build (Ollama)
 
-Bản **local FE + BE** — chưa cần AWS. Dùng FAQ demo theo 8 nhóm câu hỏi MVP.
+## Kiến trúc
 
-## Yêu cầu
+- **RAG tự build:** DOCX/PDF → chunk → embed (`nomic-embed-text`) → retrieve → LLM Ollama (`qwen2.5:3b`, tránh thinking của qwen3)
+- **Fallback:** FAQ demo nếu chưa ingest / Ollama tắt
+- **Cloud:** cùng stack lên **EC2 + S3** (credit $120)
+- **Không dùng Bedrock**
 
-- Python 3.10+
+Chi tiết: `docs/11-rag-ollama-huong-dan.md`
 
-## Chạy
+## 1. Ollama
 
 ```powershell
-cd "C:\Users\HP VICTUS\Documents\VKU_Subjects\HK7\CloudComputing\VKU_Virtual_Assistant\backend"
-python -m venv .venv
+ollama pull qwen2.5:3b
+ollama pull nomic-embed-text
+ollama list
+```
+
+## 2. Ingest + web
+
+```powershell
+cd backend
 .\.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
+python -m app.ingest
 uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
-Mở trình duyệt: **http://127.0.0.1:8000**
+Mở http://127.0.0.1:8000  
+Health: http://127.0.0.1:8000/api/health → `"rag_ready": true`
 
-## API
+## Câu hỏi demo (đúng nguồn đang index)
 
-| Method | Path | Mô tả |
-|---|---|---|
-| GET | `/api/health` | Health check |
-| GET | `/api/suggestions` | Câu hỏi gợi ý |
-| POST | `/api/chat` | `{ "message": "...", "session_id": null }` |
+Hiện vector store chủ yếu là **học phí** (`hoc-vu/hoc-phi/*.docx`):
 
-## Câu demo nên hỏi khi báo cáo
+1. Thời gian nộp học phí hè 2024-2025?  
+2. Nộp học phí bằng QR hay chuyển khoản?  
+3. Số tài khoản nộp học phí VKU?  
+4. Thời tiết Đà Nẵng hôm nay? → không có trong tài liệu  
 
-1. Học phí một tín chỉ bao nhiêu?
-2. Điều kiện tốt nghiệp là gì?
-3. VKU tuyển những ngành nào?
-4. Địa chỉ VKU ở đâu?
-5. Thời tiết Đà Nẵng hôm nay? → fallback ngoài phạm vi
+> Quy chế PDF chưa vào RAG nếu không extract được chữ — cần OCR/PDF text rồi ingest lại.
 
-## Ghi chú bảo vệ / báo cáo tiến độ
+## Ghi chú báo cáo
 
-- Đây là **MVP local** (keyword FAQ), chứng minh giao diện + luồng chat + phân nhóm câu hỏi.
-- Roadmap Cloud: thay `knowledge.py` bằng gọi **Bedrock Knowledge Bases** + PDF trên S3; FE host CloudFront.
+> Nhóm tự xây pipeline RAG (ingest–retrieve–generate) với mô hình open-source qua Ollama; triển khai trên AWS EC2 và lưu tài liệu trên S3. Không sử dụng Amazon Bedrock.
