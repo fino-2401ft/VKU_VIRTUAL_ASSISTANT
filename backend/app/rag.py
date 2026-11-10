@@ -599,16 +599,16 @@ def _try_detailed_regulation_answer(
     }
 
 
-def answer_with_rag(question: str, top_k: int = 4) -> dict[str, Any]:
+def answer_with_rag(question: str, top_k: int = 3) -> dict[str, Any]:
     if not ollama_client.is_available():
         raise RuntimeError("Ollama không khả dụng")
     if not store_exists():
         raise RuntimeError("Chưa ingest tài liệu (chạy: python -m app.ingest)")
 
     q_emb = ollama_client.embed(question)
-    hits = search(q_emb, top_k=max(12, top_k * 3))
+    hits = search(q_emb, top_k=max(8, top_k * 2))
     hits = [h for h in hits if h.get("score", 0) >= 0.20]
-    hits = _rerank(question, hits, keep=max(top_k, 6))
+    hits = _rerank(question, hits, keep=top_k)
 
     if not hits:
         return {
@@ -648,7 +648,7 @@ def answer_with_rag(question: str, top_k: int = 4) -> dict[str, Any]:
     prompt = (
         f"Câu hỏi: {question}\n\n"
         f"Tài liệu:\n{context}\n\n"
-        "Hãy trả lời đầy đủ bằng tiếng Việt: liệt kê từng ý trong mục liên quan, không rút gọn, không kèm suy nghĩ."
+        "Trả lời ngắn gọn bằng tiếng Việt, chỉ dùng thông tin trong tài liệu, không kèm suy nghĩ."
     )
     answer = ollama_client.chat(prompt, SYSTEM_PROMPT).strip()
     avg_score = sum(h.get("score", 0) for h in hits) / len(hits)

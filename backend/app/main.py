@@ -50,20 +50,18 @@ class ChatResponse(BaseModel):
 
 
 def resolve_answer(message: str) -> dict[str, Any]:
-    """Ưu tiên RAG Ollama; lỗi/thiếu thì fallback FAQ."""
+    """FAQ nhanh trước; RAG khi FAQ yếu. Timeout/lỗi RAG → fallback FAQ (không hiện lỗi kỹ thuật)."""
+    faq = answer_question(message)
+    if faq.get("mode") == "faq-demo" and float(faq.get("confidence") or 0) >= 0.65:
+        return faq
+
     if rag_ready():
         try:
             return answer_with_rag(message)
-        except Exception as exc:  # noqa: BLE001
-            faq = answer_question(message)
-            faq["answer"] = (
-                f"(RAG tạm lỗi: {exc})\n\n" + faq["answer"]
-                if faq.get("mode") == "faq-demo"
-                else faq["answer"]
-            )
+        except Exception:  # noqa: BLE001
             faq["mode"] = "faq-fallback"
             return faq
-    return answer_question(message)
+    return faq
 
 
 @app.get("/api/health")

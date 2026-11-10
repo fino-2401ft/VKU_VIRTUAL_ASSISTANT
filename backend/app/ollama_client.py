@@ -19,7 +19,7 @@ def is_available(timeout: float = 2.0) -> bool:
         return False
 
 
-def embed(text: str, timeout: float = 45.0) -> list[float]:
+def embed(text: str, timeout: float = 90.0) -> list[float]:
     r = httpx.post(
         f"{OLLAMA_BASE}/api/embeddings",
         json={"model": EMBED_MODEL, "prompt": text},
@@ -58,9 +58,8 @@ def _strip_reasoning(content: str) -> str:
     return text
 
 
-def chat(prompt: str, system: str, timeout: float = 60.0) -> str:
+def chat(prompt: str, system: str, timeout: float = 120.0) -> str:
     # qwen3 hay "think" trong content → tắt think + /no_think + lọc output
-    # Timeout ngắn trên EC2 nhỏ: quá hạn thì main.py fallback FAQ.
     user_content = f"{prompt}\n\n/no_think"
     r = httpx.post(
         f"{OLLAMA_BASE}/api/chat",
@@ -74,7 +73,7 @@ def chat(prompt: str, system: str, timeout: float = 60.0) -> str:
             ],
             "options": {
                 "temperature": 0.1,
-                "num_predict": 400,
+                "num_predict": 250,
             },
         },
         timeout=timeout,
